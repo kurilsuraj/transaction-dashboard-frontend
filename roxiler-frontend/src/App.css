@@ -1,0 +1,55 @@
+.bg-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #d4fdff;
+  
+  
+}
+
+.card-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+.search-filter-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+  
+}
+.heading {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.image {
+  height: 50px;
+  width: 50px;
+}
+
+.table-container {
+  width: 80vw;
+  margin-top: 25px;
+  background-color: yellowgreen;
+  padding: 10px;
+  border-radius: 10px;
+  
+}
+
+.search-input {
+  background-color: yellow;
+}
+
+.month-fliter{
+  background-color: yellow;
+}
