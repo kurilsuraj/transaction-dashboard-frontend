@@ -53,3 +53,10 @@
 .month-fliter{
   background-color: yellow;
 }
+
+.statics-container {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: yellow;
+  margin-bottom: 10px;
+}

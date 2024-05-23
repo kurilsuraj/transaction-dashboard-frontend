@@ -31,8 +31,11 @@ class App extends Component {
 
   render() {
     const { searchInput, transactions, selectedMonth } = this.state;
+
     console.log(transactions)
 
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monthInWords = selectedMonth === "All" ? "All Months" : months[parseInt(selectedMonth)]
     const filterTransaction = transactions.filter(each => {
       const month = new Date(each.dateOfSale).getMonth();
       if (parseInt(selectedMonth) === month || selectedMonth === "All") {
@@ -41,6 +44,11 @@ class App extends Component {
   
       return null
     })
+
+    const soldCount = filterTransaction.reduce((acc, item) => (item.sold ? acc + 1 : acc), 0);
+    const notSoldCount = filterTransaction.reduce((acc, item) => (item.sold === false ? acc + 1 : acc), 0);
+    const totalSale = filterTransaction.reduce((acc, item) => (item.sold ? acc + item.price : acc), 0);
+
 
     return (
       <div className="bg-container">
@@ -98,6 +106,15 @@ class App extends Component {
                 ))}
               </tbody>
             </table>
+          </div>
+          <div>
+            <h1 className="heading">Statistics - {monthInWords}</h1>
+            <div className='statics-container'>
+            <p>Total Sale: {totalSale}</p>
+            <p>Total Sold Item:{soldCount}</p>
+            <p>Total Not Sold Item: {notSoldCount}</p>
+            </div>
+            
           </div>
         </div>
       </div>
