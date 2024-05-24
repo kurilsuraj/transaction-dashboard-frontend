@@ -41,8 +41,14 @@ class App extends Component {
   };
 
   onChangeSearchInput = (event) => {
-    this.setState({ searchInput: event.target.value }, this.getTransactions);
+      this.setState({ searchInput: event.target.value });
   };
+
+  onPressEnter = event => {
+    if (event.key === "Enter") {
+      this.setState({searchInput: event.target.value}, this.getTransactions)
+    }
+  }
 
   onChangeSelectedMonth = (event) => {
     this.setState({ selectedMonth: event.target.value }, this.getTransactions);
@@ -96,6 +102,7 @@ class App extends Component {
         <div className="search-filter-container">
           <input className='search-input'
             onChange={this.onChangeSearchInput}
+            onKeyDown={this.onPressEnter}
             value={searchInput}
             type="search"
             placeholder="Search transaction"
