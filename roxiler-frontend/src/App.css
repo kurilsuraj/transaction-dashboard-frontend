@@ -60,3 +60,10 @@
   background-color: yellow;
   margin-bottom: 10px;
 }
+
+.products-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
