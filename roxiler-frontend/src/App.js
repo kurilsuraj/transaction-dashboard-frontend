@@ -24,20 +24,24 @@ class App extends Component {
   }
 
   getTransactions = async () => {
-    this.setState({apiStatus: apiStatusConstants.inProgress})
+    this.setState({ apiStatus: apiStatusConstants.inProgress });
     const { searchInput } = this.state;
     const url = `https://transaction-dashboard-server-two.vercel.app/alltransactions/?search=${searchInput}`;
+  
+    try {
+      const response = await fetch(url);
 
-    const response = await fetch(url);
-    
-    if (response.ok) {
-      const data = await response.json();
-      this.setState({ transactions: data, apiStatus: apiStatusConstants.success });
+  
+      if (response.status === 200) {
+        const data = await response.json();
+        this.setState({ transactions: data, apiStatus: apiStatusConstants.success });
+      } else {
+        throw new Error('API request failed with status code: ' + response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+      this.setState({ apiStatus: apiStatusConstants.failure });
     }
-    else {
-      this.setState({apiStatus: apiStatusConstants.failure})
-    }
-    
   };
 
   onChangeSearchInput = (event) => {
@@ -78,8 +82,6 @@ class App extends Component {
 
   renderSuccessView = () => {
     const { searchInput, transactions, selectedMonth} = this.state;
-
-    console.log(transactions)
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const monthInWords = selectedMonth === "All" ? "All Months" : months[parseInt(selectedMonth)]
